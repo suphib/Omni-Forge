@@ -1,0 +1,192 @@
+/* ─────────────────────────────────────────────────────────────
+   OMNI-FORGE — Mobile Design Tokens (extends desktop styles.css)
+   ───────────────────────────────────────────────────────────── */
+
+.mob {
+  /* Inherit from :root in styles.css */
+  width: 100%; height: 100%; position: relative;
+  background: var(--bg-deep);
+  color: var(--bone);
+  font-family: var(--f-ui);
+  font-size: 15px;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Subtle grain on every mobile screen */
+.mob::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 50;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.78  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.4; mix-blend-mode: overlay;
+}
+
+/* Top app bar */
+.mob-appbar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px 10px; min-height: 44px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(36,40,33,0.95), rgba(20,22,16,0.85));
+  position: relative; z-index: 10;
+}
+.mob-appbar .left, .mob-appbar .right { display: flex; align-items: center; gap: 10px; }
+.mob-appbar .right { margin-left: auto; }
+.mob-appbar .ttl { font-family: var(--f-display); font-weight: 700; font-size: 17px; letter-spacing: 0.06em; }
+
+/* Bottom tab bar */
+.mob-tabbar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  background: linear-gradient(0deg, rgba(36,40,33,0.95), rgba(20,22,16,0.85));
+  padding: 8px 0 22px;
+  position: relative; z-index: 10;
+}
+.mob-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 6px 4px; cursor: pointer;
+  color: var(--bone-dim);
+}
+.mob-tab.active { color: var(--cyan-soft); }
+.mob-tab .lbl { font-family: var(--f-display); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Primary CTA */
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; min-height: 56px; padding: 16px 20px;
+  background: var(--cyan-ink); border: 1px solid var(--cyan-dim);
+  color: var(--cyan-soft); font-family: var(--f-display);
+  font-weight: 700; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase;
+  cursor: pointer; position: relative;
+}
+.cta:active { background: rgba(111,200,216,0.22); }
+.cta.danger { background: var(--red-ink); border-color: var(--red); color: var(--red-bright); }
+.cta.ghost { background: transparent; color: var(--bone-mute); border-color: var(--line); }
+.cta.sm { min-height: 44px; padding: 10px 16px; font-size: 12px; }
+
+/* Currency chip */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border: 1px solid var(--line);
+  background: rgba(0,0,0,0.4);
+}
+.chip .v { font-family: var(--f-mono); font-weight: 600; font-size: 13px; color: var(--bone); font-variant-numeric: tabular-nums; }
+.chip .ico { font-size: 13px; }
+.chip.scrap .ico { color: var(--amber); }
+.chip.gem .ico   { color: var(--cyan); }
+
+/* Card */
+.card {
+  background: linear-gradient(180deg, rgba(36,40,33,0.85), rgba(20,22,16,0.92));
+  border: 1px solid var(--line);
+  padding: 14px;
+  position: relative;
+}
+.card-hd {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bone-mute); padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft); margin-bottom: 12px;
+}
+
+/* Stat tile */
+.tile {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px; border: 1px solid var(--line);
+  background: rgba(0,0,0,0.4);
+}
+.tile .k { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone-dim); }
+.tile .v { font-family: var(--f-display); font-size: 22px; font-weight: 700; color: var(--bone); }
+
+/* Mobile module chip */
+.mchip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line); background: rgba(20,22,16,0.6);
+}
+.mchip.eq { border-color: var(--cyan-dim); background: var(--cyan-ink); }
+.mchip .ico { width: 40px; height: 40px; display: grid; place-items: center; background: var(--bg-deep); border: 1px solid var(--line); color: var(--cyan-soft); }
+.mchip .nm  { font-family: var(--f-display); font-weight: 600; font-size: 14px; }
+.mchip .sm  { font-family: var(--f-mono); font-size: 10px; color: var(--bone-dim); letter-spacing: 0.08em; margin-top: 1px; }
+.mchip .ar  { margin-left: auto; color: var(--bone-faint); font-size: 18px; }
+
+/* Bottom sheet header */
+.sheet-grab { width: 36px; height: 4px; background: var(--bone-faint); border-radius: 2px; margin: 8px auto; }
+
+/* Touch joystick / button */
+.touch-pad {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(143,210,222,0.15), rgba(0,0,0,0.4) 70%);
+  border: 1.5px solid var(--cyan-dim);
+  display: grid; place-items: center;
+  position: relative;
+}
+.touch-pad .nub {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(143,210,222,0.55), rgba(143,210,222,0.15));
+  border: 1.5px solid var(--cyan-soft);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.touch-btn {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle, rgba(20,22,16,0.85), rgba(0,0,0,0.6));
+  border: 1.5px solid var(--line-strong);
+  font-family: var(--f-display); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.12em; color: var(--bone);
+  position: relative;
+}
+.touch-btn.fire {
+  background: radial-gradient(circle, rgba(217,72,56,0.4), rgba(70,18,12,0.7));
+  border-color: var(--red);
+  color: var(--red-bright);
+  box-shadow: 0 0 16px rgba(217,72,56,0.4), inset 0 0 12px rgba(217,72,56,0.3);
+}
+.touch-btn.cyan {
+  background: radial-gradient(circle, rgba(111,200,216,0.25), rgba(20,22,16,0.8));
+  border-color: var(--cyan-dim);
+  color: var(--cyan-soft);
+}
+.touch-btn.sm { width: 52px; height: 52px; font-size: 10px; }
+
+/* Toggle (iOS-like) */
+.tog {
+  width: 50px; height: 28px; border-radius: 999px;
+  background: rgba(0,0,0,0.5); border: 1px solid var(--line);
+  position: relative; cursor: pointer;
+}
+.tog.on { background: var(--cyan-ink); border-color: var(--cyan-dim); }
+.tog::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bone); transition: left .15s;
+}
+.tog.on::after { left: 26px; background: var(--cyan-soft); }
+
+/* Settings row */
+.row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-bottom: 1px solid var(--line-soft);
+  background: rgba(20,22,16,0.4);
+}
+.row .lbl { flex: 1; }
+.row .lbl b { font-size: 14px; font-weight: 600; display: block; }
+.row .lbl span { font-size: 11px; color: var(--bone-dim); display: block; margin-top: 2px; font-family: var(--f-mono); letter-spacing: 0.04em; }
+.row .ch { color: var(--bone-faint); }
+
+/* Floating overlays */
+.dim { background: rgba(0,0,0,0.6); position: absolute; inset: 0; z-index: 40; }
+
+/* Generic icon */
+.ic { display: inline-grid; place-items: center; }
+.ic svg { width: 1em; height: 1em; }
+
+/* Animations */
+@keyframes search-pulse {
+  0%,100% { transform: scale(1); opacity: 0.4; }
+  50%     { transform: scale(1.4); opacity: 0; }
+}
+@keyframes ring-rotate {
+  to { transform: rotate(360deg); }
+}
