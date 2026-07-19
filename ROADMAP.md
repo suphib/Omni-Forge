@@ -19,13 +19,16 @@ fließt später in B ein.
       Kampfmusik-Loop (`musicTick`), Sieges-Fanfare / Niederlage-Sound.
 - [x] **Kill-Cam-Moment:** Zeitlupe + Kamera-Zoom auf die Explosion (`killPos` in `updateCamera`).
 
-### v5 — Mechs zum Anfassen
-- [ ] **Bessere Mech-Modelle:** näher an den Dossier-Designs (Stier: Saugknöpfe/Doppelhorn,
-      Krampus: Bohr-Beine/Knochen-Stacheln), Lauf-Animation der Beine, Torso dreht zum Ziel,
-      Wrack bleibt nach Zerstörung kurz liegen.
-- [ ] **Loadout-Auswahl vor dem Match:** 2 von 5 Fähigkeiten frei wählen (nutzt die
-      Modul-Idee aus `data.js` — Vorstufe der Werkstatt aus dem Handoff).
-- [ ] **Drohnen:** `data.js` definiert bereits DRONES — eine Begleit-Drohne als 6. Fähigkeit.
+### v5 — Mechs zum Anfassen ✅ (gebaut, `playable-prototype/v5/`)
+- [x] **Bessere Mech-Modelle:** näher an den Dossiers (Stier: hexagonale Saugknöpfe + Doppelhorn,
+      Krampus: rotierende Bohr-Beine + Kranz aus Knochen-Stacheln). Lauf-Animation der Beine,
+      Oberkörper dreht zum Ziel während die Beine in Laufrichtung zeigen (`upper`-Gruppe im Modell),
+      Wrack kippt um und bleibt rauchend liegen bis zum Respawn.
+- [x] **Loadout-Auswahl vor dem Match:** eigener Ausrüstungs-Screen (Karte → Loadout → Kampf);
+      Fähigkeiten frei an-/abwählbar (Default alle an — bewusst nicht auf hartes „2 von 5"
+      begrenzt, um den Spaß nicht zu beschneiden) + optionale Drohne. Gating über `player.equip`.
+- [x] **Drohne:** „Späher SCT-1" als optionales Modul — begleitet den Spieler und feuert
+      automatisch auf den Gegner (`updateDrone`/`fireDrone`).
 
 ### v6 — Progression light
 - [ ] **Schrott ausgeben:** Zwischen Matches Upgrades kaufen (Panzerung +10 %, Cooldown −10 %,
