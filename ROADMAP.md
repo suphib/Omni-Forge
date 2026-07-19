@@ -8,13 +8,16 @@ fließt später in B ein.
 
 ## Spur A — Prototyp (v4, v5, …)
 
-### v4 — Match-Struktur & Spielgefühl (empfohlener nächster Schritt)
-- [ ] **Spielziel:** Sieg bei 5 Kills oder nach 3 Minuten; Sieger-/Verlierer-Bildschirm mit
-      Statistik (Kills, Schaden, Genauigkeit) und „Nochmal"-Button. Aktuell ist das Duell endlos.
-- [ ] **Schwierigkeitsgrade:** Leicht / Mittel / Schwer wählbar auf dem Startbildschirm
-      (skaliert KI-Cooldowns, Schaden und Reaktionsweite — die Stellschrauben existieren schon).
-- [ ] **Countdown & Musik:** 3-2-1-Start, kurze Kampf-Loop-Musik (prozedural), Sieges-Fanfare.
-- [ ] **Kill-Cam-Moment:** Zeitlupe existiert; dazu kurzer Kamera-Zoom auf die Explosion.
+### v4 — Match-Struktur & Spielgefühl ✅ (gebaut, `playable-prototype/v4/`)
+- [x] **Spielziel:** Sieg bei 5 Kills oder nach 3 Minuten (bei Zeitablauf mehr Kills = Sieg,
+      Gleichstand = Unentschieden); Sieger-/Verlierer-Bildschirm mit Statistik
+      (Kills, Tode, Schaden, Treffer-%, Schrott) und „Nochmal" / „Andere Einheit".
+- [x] **Schwierigkeitsgrade:** Leicht / Mittel / Schwer auf dem Startbildschirm — skaliert
+      KI-Cooldown (`aiCd`), Spieler-Schadensbonus/-resistenz (`playerDeal`/`playerTake`) und
+      KI-Schild-Nutzung (`aiShield`) über das `DIFFS`-Objekt.
+- [x] **Countdown & Musik:** 3-2-1-Countdown (Kampf eingefroren), prozedurale 16-Schritt-
+      Kampfmusik-Loop (`musicTick`), Sieges-Fanfare / Niederlage-Sound.
+- [x] **Kill-Cam-Moment:** Zeitlupe + Kamera-Zoom auf die Explosion (`killPos` in `updateCamera`).
 
 ### v5 — Mechs zum Anfassen
 - [ ] **Bessere Mech-Modelle:** näher an den Dossier-Designs (Stier: Saugknöpfe/Doppelhorn,
