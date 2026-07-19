@@ -31,8 +31,12 @@
   .card ul { list-style:none; font-size:12px; color:#aab6c2; line-height:1.7; }
   .card ul li::before { content:"▸ "; color:#f4a82c; }
   .pick { margin-top:12px; font-size:12px; font-weight:700; letter-spacing:1px; color:#6eeba0; }
+  .qr { margin-top:16px; display:inline-flex; align-items:center; gap:12px; text-align:left;
+        background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:10px 14px; }
+  .qr img { width:96px; height:96px; background:#fff; padding:5px; border-radius:8px; }
+  .qr div { font-size:11px; color:#8ea0b2; letter-spacing:1.5px; text-transform:uppercase; line-height:1.7; }
   #err { position:fixed; left:12px; bottom:12px; z-index:20; color:#ff8c8c; font:600 12px system-ui; max-width:80vw; }
-  @media (max-width:640px){ .cards { grid-template-columns:1fr; } .card ul { display:none; } }
+  @media (max-width:640px){ .cards { grid-template-columns:1fr; } .card ul { display:none; } .qr { display:none; } }
 </style>
 <script type="importmap">
 { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
@@ -62,6 +66,10 @@
       </div>
     </div>
     <div class="sub" style="margin-top:18px">Auto-Ziel + Auto-Waffe · Desktop: WASD bewegen · Klick/halten = feuern · 1–5 Fähigkeiten · 6 Riesen-MG (Krampus) · Leertaste Nahkampf · Shift Schild · M Ton · R neu &nbsp;|&nbsp; Touch: linker Stick bewegen, rechts halten = feuern, Buttons</div>
+    <div class="qr">
+      <img src="qr.svg" alt="QR-Code — Spiel-Link zum Scannen" width="96" height="96">
+      <div>Mit Handy/iPad scannen<br>und sofort losspielen</div>
+    </div>
   </div>
 </div>
 <div id="err"></div>
