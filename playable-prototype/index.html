@@ -449,7 +449,7 @@ try {
 
   // ===================================================== Update
   function update(dt){
-    time+=dt;
+    time+=dt; if(tapFireT>0) tapFireT-=dt;
     if(player.alive&&player.stun<=0){ const c=getControls();
       player.aim = aimAt(player, enemy, player.def.primary.speed);   // Auto-Ziel auf Gegner
       moveMech(player,c.mvx,c.mvz,dt); if(c.firing) autoFire(player);  // Auto-Waffe
@@ -507,7 +507,7 @@ try {
   }
 
   // ===================================================== Eingabe (auf HUD-Canvas)
-  const keys=new Set(); let inputMode="kbm";
+  const keys=new Set(); let inputMode="kbm", tapFireT=0;
   const mouse={x:0,z:0,down:false}; const sticks={move:null,aim:null}; const STICK_R=74; const buttonTouches=new Set();
   const ray=new THREE.Raycaster(); const groundPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0); const hitPt=new THREE.Vector3();
   function mouseToGround(sx,sy){ const ndc=new THREE.Vector2((sx/view.w)*2-1, -(sy/view.h)*2+1);
@@ -528,7 +528,10 @@ try {
   function touchStart(e){ inputMode="touch"; for(const t of e.changedTouches){ if(!running) continue;
     if(hitMute(t.clientX,t.clientY)){ Sound.muted=!Sound.muted; ensureAudio(); if(!Sound.muted) SFX.ui(); buttonTouches.add(t.identifier); continue; }
     const slot=hitButton(t.clientX,t.clientY); if(slot){ buttonTouches.add(t.identifier); activate(player,slot); continue; }
-    const half=t.clientX<view.w/2?"move":"aim"; if(!sticks[half]) sticks[half]={id:t.identifier,ox:t.clientX,oy:t.clientY,dx:0,dy:0,mag:0}; } e.preventDefault(); }
+    const half=t.clientX<view.w/2?"move":"aim";
+    if(half==="aim"){ if(!sticks.aim) sticks.aim={id:t.identifier,ox:t.clientX,oy:t.clientY,dx:0,dy:0,mag:0}; tapFireT=0.22; }
+    else if(!sticks.move) sticks.move={id:t.identifier,ox:t.clientX,oy:t.clientY,dx:0,dy:0,mag:0};
+    else tapFireT=0.22; } e.preventDefault(); }   // jeder weitere Tipp = feuern, egal wohin
   function touchMove(e){ for(const t of e.changedTouches){ for(const key of ["move","aim"]){ const s=sticks[key];
     if(s&&s.id===t.identifier){ let dx=t.clientX-s.ox,dy=t.clientY-s.oy; const m=Math.hypot(dx,dy);
       if(m>STICK_R){ dx=dx/m*STICK_R; dy=dy/m*STICK_R; } s.dx=dx; s.dy=dy; s.mag=Math.min(m,STICK_R)/STICK_R; } } } e.preventDefault(); }
@@ -539,7 +542,8 @@ try {
 
   function getControls(){ let mvx=0,mvz=0,aimx=0,aimz=0,firing=false;
     if(inputMode==="touch"){ if(sticks.move){ mvx=sticks.move.dx/STICK_R; mvz=sticks.move.dy/STICK_R; }
-      if(sticks.aim&&sticks.aim.mag>0.35){ aimx=sticks.aim.dx; aimz=sticks.aim.dy; firing=true; } }
+      if(sticks.aim){ aimx=sticks.aim.dx; aimz=sticks.aim.dy; }
+      firing=!!sticks.aim||tapFireT>0; }   // Tippen ODER Halten feuert — Auto-Ziel übernimmt das Zielen
     else { if(keys.has("w")||keys.has("arrowup"))mvz-=1; if(keys.has("s")||keys.has("arrowdown"))mvz+=1;
       if(keys.has("a")||keys.has("arrowleft"))mvx-=1; if(keys.has("d")||keys.has("arrowright"))mvx+=1;
       const m=Math.hypot(mvx,mvz); if(m>1){ mvx/=m; mvz/=m; }
