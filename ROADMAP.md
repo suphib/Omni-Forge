@@ -30,10 +30,13 @@ fließt später in B ein.
 - [x] **Drohne:** „Späher SCT-1" als optionales Modul — begleitet den Spieler und feuert
       automatisch auf den Gegner (`updateDrone`/`fireDrone`).
 
-### v6 — Progression light
-- [ ] **Schrott ausgeben:** Zwischen Matches Upgrades kaufen (Panzerung +10 %, Cooldown −10 %,
-      Munition +25 %) — Spielstand in `localStorage`.
-- [ ] **Match-Historie:** Siege/Niederlagen pro Schwierigkeitsgrad.
+### v6 — Progression light ✅ (gebaut, `playable-prototype/v6/`)
+- [x] **Schrott ausgeben:** Werkstatt-Overlay (von Start- & Sieger-Bildschirm erreichbar) —
+      dauerhafte Upgrades in je 5 Stufen: Panzerung (+10% HP), Kühlung (−8% Abklingzeit),
+      Munition (+25%). Schrott-Konto + Upgrades in `localStorage` (`save`, `SAVE_KEY`),
+      angewandt in `makeMech` via `playerMods()`.
+- [x] **Match-Historie:** Siege/Niederlagen pro Schwierigkeitsgrad (`save.history`), in der
+      Werkstatt angezeigt; am Match-Ende gebucht (`showEndScreen`).
 
 ### v7 — Mobile-Polish
 - [ ] **PWA:** Manifest + Icon, damit „Zum Home-Bildschirm" wie eine echte App startet (Vollbild).
