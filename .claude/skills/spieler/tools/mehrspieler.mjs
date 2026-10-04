@@ -4,6 +4,8 @@
 import fs from 'fs'; import path from 'path';
 import { here, skill, arg, defaultOut, playwright, prepare, serve, launchArgs } from './lib.mjs';
 const VER = arg('version', 'v17'), N = Math.min(4, Math.max(2, +arg('spieler', 2))), TAG = arg('tag', 'mp'), NOTIZ = arg('notiz', ''), SHOTS = !process.argv.includes('--keine-bilder');
+const RELAY = arg('relay', ''), NETMODE = arg('net', '');   // v18: --relay ws://127.0.0.1:8765/ (nur lokal) · --net local = Browser-Kanal statt Server
+const EXTRA = (RELAY ? '&relay=' + encodeURIComponent(RELAY) : '') + (NETMODE ? '&net=' + NETMODE : '');
 const OUT = defaultOut(); const chromium = playwright(OUT); prepare(VER, OUT); const { server, port } = await serve(OUT);
 const strat = JSON.parse(fs.readFileSync(path.join(skill, 'strategie.json'), 'utf8'));
 const NAMES = ['Anna', 'Ben', 'Cem', 'Dora'].slice(0, N), ROOM = 'BOT' + Math.floor(Math.random() * 900 + 100);
@@ -12,7 +14,7 @@ const pages = []; const ctx = await browser.newContext({ viewport: { width: 960,
 for (const name of NAMES) {
   const pg = await ctx.newPage(); pg.setDefaultTimeout(0);
   pg.on('console', m => { if (m.type() === 'error' && !/404|favicon/.test(m.text())) errs.push(name + ': ' + m.text()); }); pg.on('pageerror', e => errs.push(name + ' PAGEERROR: ' + e.message));
-  await pg.goto(`http://127.0.0.1:${port}/${VER}/index.html?room=${ROOM}&name=${name}&slot=${name}`, { waitUntil: 'load' }); pages.push(pg);
+  await pg.goto(`http://127.0.0.1:${port}/${VER}/index.html?room=${ROOM}&name=${name}&slot=${name}${EXTRA}`, { waitUntil: 'load' }); pages.push(pg);
 }
 await pages[0].waitForTimeout(2000);
 for (const pg of pages) { await pg.click('.card.stier'); await pg.waitForTimeout(300); await pg.click('#btnStart'); }

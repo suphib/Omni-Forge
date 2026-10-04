@@ -35,8 +35,8 @@ Er ersetzt keinen Menschen am Handy — er findet Hänger, Balance-Probleme, Lee
 - `tools/play.mjs` — startet Spiel + Bot, schreibt Bericht und Verlauf · `tools/bot.js` — das Verhalten (läuft im Spiel) · `tools/setup.sh` · `tools/vergleich.mjs`
 - `strategie.json` — Stellschrauben des Bots (`stand` = Lernstand) · `wissen.md` · `erkenntnisse.md` · `verlauf.md` · `berichte/` (ein Bericht pro Lauf)
 
-## Mehrspieler (ab v17)
+## Mehrspieler (ab v17, online ab v18)
 
-`node .claude/skills/spieler/tools/mehrspieler.mjs --version v17 --spieler 2 --tag mp-1` startet zwei (bis vier) Bots in einem Raum — je ein Tab im selben Browser (gemeinsamer Browser-Kanal), eigener Name und eigener Speicherstand (`?slot=`).
+`node .claude/skills/spieler/tools/mehrspieler.mjs --version v18 --spieler 2 --tag mp-1` startet zwei (bis vier) Bots in einem Raum — ab v18 über den echten Spiel-Server `wss://spiel.fraglokal.de` (Optionen: `--relay ws://127.0.0.1:8765/` für einen lokalen Server aus `server/spiel/`, `--net local` für den Browser-Kanal), eigener Name und eigener Speicherstand (`?slot=`). Bricht ein Online-Lauf mit Verbindungsfehlern ab, zuerst prüfen, ob gerade ein Fraglokal-Release lief (nginx-Neustart), dann wiederholen.
 Szenario: **A** getrennte Welten (einer geht ins Portal, die anderen bleiben; geprüft: sie sehen sich nur als „in Welt X", nicht im Spiel) → **B** alle in dieselbe Welt, jagen und bekämpfen sich. Gemessen werden: wann sie sich treffen, erster Treffer, Kills/Tode, Waffen-Nachrichten, Abstandsfehler der Abbilder.
 Plan, Grenzen und offene Punkte (Internet-Verbindung, Betrugsschutz, gemeinsame Bosse): `MEHRSPIELER.md`.

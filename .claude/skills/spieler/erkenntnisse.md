@@ -13,3 +13,8 @@
 **Geändert in v16:** Boss-HP +33 %; Boss-Phasen bei 66/33 % („rastet aus": schneller, stampft öfter); ausweichbarer **Bodenschlag** (roter Kreis, 1,5 s); Beute-Orbs und Abschuss-Serie (Super lädt schneller); Boss-Kompass (gelber Pfeil mit Meter-Angabe); Wege machen 25 % schneller; Meldungs-Spam gedrosselt.
 **Wirkung (je 1 Lauf, noch nicht belastbar):** Kampfzeit pro Boss 29–34 s → 36–39 s; Bodenschlag-Ausweichen senkte den Schaden um etwa 10 % (7597 gegen 8462). Weiter beobachten: Laufanteil ≈ 71 % bleibt hoch → nächste Idee: kürzere Wege oder Schnellreise.
 **Bot gelernt:** Tor-Wegpunkt, Hänger-Erkennung, Schild nach Treffern, Ausweichen vor Bodenschlag, Protokoll fasst Wiederholungen zusammen.
+
+## 2026-10-04 · v18 Mehrspieler über das Internet
+**Beobachtung:** Zwei Bots finden sich über `wss://spiel.fraglokal.de` genauso wie über den Browser-Kanal (Treffen nach 12 s, gegenseitige Treffer, Abbildfehler im Mittel 30 Einheiten, keine Seitenfehler). Server: 18 MB, ~0 % CPU.
+**Fund beim ersten Lauf:** Ein Fraglokal-Release startete mitten im Test den nginx neu (~30 s) → beide Spieler „net::ERR_CONNECTION_TIMED_OUT“, Lauf unbrauchbar (kein Treffer). Der Spiel-Server lief durch. **Lehre:** Bei Online-Tests Meldungen wie „getrennt/ERR_CONNECTION“ zuerst auf Server-Neustarts prüfen (`docker ps` Laufzeit), dann wiederholen. Das Spiel verbindet sich nach so einer Pause von selbst neu.
+**Sicherheit eingebaut (weil jetzt Fremde senden könnten):** Empfang bereinigt Name/Zahlen/Typen/Waffen-Plätze und begrenzt Aktivierungen je Mitspieler; Server begrenzt Nachrichten, Räume und Verbindungen. Restrisiko: wer den Raum-Code kennt, kann schummeln (Spieler vertrauen sich).

@@ -1,0 +1,10 @@
+{
+  "name": "omni-forge-spiel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Raum-Relay für den Omni-Forge-Mehrspieler (2–4 Spieler, WebSocket)",
+  "scripts": { "start": "node server.mjs", "test": "node test.mjs" },
+  "dependencies": { "ws": "^8.18.0" },
+  "engines": { "node": ">=20" }
+}
