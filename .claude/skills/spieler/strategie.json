@@ -1,0 +1,25 @@
+{
+  "stand": 2,
+  "bot": {
+    "turnRate": 3.4,
+    "travelTurnRate": 4,
+    "fireCone": 0.3,
+    "fightRangeMul": 1.15,
+    "tooCloseMul": 0.5,
+    "strafeMin": 0.7,
+    "strafeMax": 2.0,
+    "rivalRange": 1700,
+    "bossRange": 2200,
+    "fightRivals": true,
+    "useShield": true,
+    "shieldAfterDmg": 25,
+    "shopOrder": [
+      "armor",
+      "cooldown",
+      "ammo"
+    ],
+    "buyMechs": true,
+    "maxFightSecPerRival": 60,
+    "dodgeSlams": true
+  }
+}
