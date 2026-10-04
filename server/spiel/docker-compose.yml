@@ -1,5 +1,5 @@
 # Omni-Forge Spiel-Relay — läuft neben Fraglokal auf demselben Server, erreichbar über spiel.fraglokal.de (nginx von Fraglokal).
-# Eigenes Compose-Projekt (nicht Teil von Fraglokal), hängt nur am Fraglokal-Netz, damit nginx ihn erreicht. Kein offener Port.
+# Eigenes Compose-Projekt (nicht Teil von Fraglokal), hängt NUR am eigenen Netz spiel-net (nicht am Fraglokal-Netz mit Datenbank/Redis); der nginx von Fraglokal ist zusätzlich in spiel-net. Kein offener Port.
 name: omniforge-spiel
 services:
   spiel:
@@ -16,8 +16,8 @@ services:
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
     logging: { driver: json-file, options: { max-size: "5m", max-file: "2" } }
-    networks: [fraglokal-net]
+    networks: [spiel-net]
 networks:
-  fraglokal-net:
+  spiel-net:
     external: true
-    name: fraglokal_fraglokal-net
+    name: spiel-net
